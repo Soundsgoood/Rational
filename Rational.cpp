@@ -13,6 +13,7 @@ private:
 	int numerator;
 	int denominator;
 
+	//reduces fraction to lowest terms
 	void simplify()
 	{
 		int gcd = gcd_recursive(numerator, denominator);
@@ -25,6 +26,7 @@ private:
 		}
 	}
 
+	//identifies the lowest common denominator
 	int gcd_recursive(int a, int b)
 	{
 		if (b) return gcd_recursive(b, a % b);
@@ -32,6 +34,7 @@ private:
 	}
 
 public:
+	//constructs a simplified fraction
 	Rational(int numerator, int denominator)
 	{
 		if (denominator)
@@ -47,7 +50,8 @@ public:
 			this->denominator = 1;
 		}
 	}
-
+	
+	//adds an addend fraction to this fraction
 	void add(Rational addend)
 	{
 		numerator = numerator * addend.denominator + addend.numerator * denominator;
@@ -55,6 +59,7 @@ public:
 		simplify();
 	}
 
+	//subtracts a subtrahend fraction from this fraction
 	void subtract(Rational subtrahend)
 	{
 		numerator *= -1;
@@ -62,13 +67,15 @@ public:
 		numerator *= -1;
 	}
 
+	//multiplies a multiplier fraction from this fraction
 	void multiply(Rational multiplier)
 	{
 		numerator *= multiplier.numerator;
 		denominator *= multiplier.denominator;
 		simplify();
 	}
-
+	
+	//divides a divisor fraction from this fraction
 	void divide(Rational divisor)
 	{
 		if (!divisor.numerator)
@@ -89,16 +96,19 @@ public:
 		numerator = temp;
 	}
 
+	//prints the fraction in a/b form
 	void printRadical()
 	{
 		cout << toString(numerator) << '/' << toString(denominator) << endl;
 	}
 
+	//prints the fraction in floating point form
 	void printDouble()
 	{
 		cout << toString(numerator/(double)denominator) << endl;
 	}
 
+	//converts an integer to a string
 	string toString(int integer) //this version of std doesn't have to_string
 	{
 		stringstream ss;
@@ -106,6 +116,7 @@ public:
 		return ss.str();
 	}
 
+	//converts a double to a string
 	string toString(double doubleExpression)
 	{
 		stringstream ss;
